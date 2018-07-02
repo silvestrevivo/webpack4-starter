@@ -29,10 +29,22 @@ module.exports = {
   devtool: 'inline-source-map',
   // Tool to map Sass and javascript
 
+  devServer: {
+    contentBase: path.join(__dirname, 'dist'),
+    host: 'localhost',
+    port: port,
+    compress: true,
+    historyApiFallback: true,
+    open: true,
+    stats: 'errors-only',
+  },
+  // Webpack Server
+
   module: {
     rules: [
       {
         test: /\.js$/,
+        include: path.resolve(__dirname, 'src'),
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader'

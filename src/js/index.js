@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 const App = () => {
   return (
-    <div>Webpack4 starter</div>
+    <div>Webpack4 starter!</div>
   );
 }
 
