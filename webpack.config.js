@@ -4,6 +4,9 @@ const webpack = require('webpack');
 const path = require('path');
 // Module path require to define entry and out point, and the public folder
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+// Plugin to inject an HTML template in develop and production mode
+const CleanWebpackPlugin = require('clean-webpack-plugin')
+// Cleans up the files inside dist folder are not gonna be used
 
 const port = process.env.PORT || 3000;
 
@@ -57,7 +60,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './src/index.html',
       favicon: './src/favicon.ico'
-    })
+    }),
+    new CleanWebpackPlugin(['dist/*.js', 'dist/*.css'], { exclude: ['dist/favicon.ico'] })
   ]
-
 }
