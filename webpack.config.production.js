@@ -5,14 +5,13 @@ const path = require('path');
 // Module path require to define entry and out point, and the public folder
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 // Plugin to inject an HTML template in develop and production mode
-const CleanWebpackPlugin = require('clean-webpack-plugin')
-// Cleans up the files inside dist folder are not gonna be used
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+// Plugin to create a bundle css apart of javascript
 
-const port = process.env.PORT || 3000;
 
 module.exports = {
   // Development Mode [is] optimized for speed and developer experience
-  mode: 'development',
+  mode: 'production',
 
   // Entry point to compile and create bundle
   entry: `${path.resolve(__dirname, 'src')}/js/index.js`,
@@ -21,7 +20,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'dist'),
     // Path to output
-    filename: 'bundle.[hash].js',
+    filename: 'static/bundle.[hash].js',
     // This is the result, bundle.[hash].js
     // [hash] is a portion of the filename that will be replaced every time
     // you bundle => helps with caching
@@ -32,28 +31,33 @@ module.exports = {
   devtool: 'inline-source-map',
   // Tool to map Sass and javascript
 
-  devServer: {
-    contentBase: path.join(__dirname, 'dist'),
-    host: 'localhost',
-    port: port,
-    compress: true,
-    historyApiFallback: true,
-    open: true,
-    stats: 'errors-only',
-  },
-  // Webpack Server
-
   module: {
     rules: [
       {
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: ['css-loader', 'postcss-loader'],
+        }),
+      },
+      {
+        test: /\.sass$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            { loader: 'css-loader', options: { sourceMap: true } },
+            { loader: 'postcss-loader', options: { sourceMap: true } },
+            { loader: 'sass-loader', options: { sourceMap: true } },
+          ],
+        }),
+      },
+      {
         test: /\.js$/,
         include: path.resolve(__dirname, 'src'),
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader'
-        }
-      }
-    ]
+        exclude: /(node_modules)/,
+        loader: 'babel-loader',
+      },
+    ],
   },
 
   plugins: [
@@ -61,6 +65,10 @@ module.exports = {
       template: './public/index.html',
       favicon: './public/favicon.ico'
     }),
-    new CleanWebpackPlugin(['dist/*.js', 'dist/*.css', 'dist/*.html'], { exclude: ['dist/favicon.ico'] })
+    new ExtractTextPlugin({
+      filename: 'styles/styles.[hash].css',
+      allChunks: true,
+      disable: process.env.NODE_ENV !== 'production'
+    })
   ]
 }
