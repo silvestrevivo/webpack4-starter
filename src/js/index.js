@@ -1,6 +1,7 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom'
 import App from './components/app'
-import '../sass/style.sass';
+import 'normalize.css'
+import '../sass/style.sass'
 
 ReactDOM.render(<App />, document.getElementById('app'));
