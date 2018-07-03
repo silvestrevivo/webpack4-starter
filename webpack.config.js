@@ -58,9 +58,9 @@ module.exports = {
 
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/index.html',
-      favicon: './src/favicon.ico'
+      template: './public/index.html',
+      favicon: './public/favicon.ico'
     }),
-    new CleanWebpackPlugin(['dist/*.js', 'dist/*.css'], { exclude: ['dist/favicon.ico'] })
+    new CleanWebpackPlugin(['dist/*.js', 'dist/*.css', 'dist/*.html'], { exclude: ['dist/favicon.ico'] })
   ]
 }
