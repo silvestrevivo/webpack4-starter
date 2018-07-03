@@ -40,6 +40,7 @@ module.exports = {
     historyApiFallback: true,
     open: true,
     stats: 'errors-only',
+    hot: true
   },
   // Webpack Server
 
@@ -61,6 +62,7 @@ module.exports = {
       template: './public/index.html',
       favicon: './public/favicon.ico'
     }),
-    new CleanWebpackPlugin(['dist/*.js', 'dist/*.css', 'dist/*.html'], { exclude: ['dist/favicon.ico'] })
+    new CleanWebpackPlugin(['dist/*.js', 'dist/*.css', 'dist/*.html'], { exclude: ['dist/favicon.ico'] }),
+    new webpack.HotModuleReplacementPlugin()
   ]
 }
