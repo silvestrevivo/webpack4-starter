@@ -41,7 +41,7 @@ module.exports = {
         }),
       },
       {
-        test: /\.sass$/,
+        test: /\.scss$/,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
           use: [
@@ -56,6 +56,19 @@ module.exports = {
         include: path.resolve(__dirname, 'src'),
         exclude: /(node_modules)/,
         loader: 'babel-loader',
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg)(\?[\s\S]+)?$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[hash].[ext]',
+              outputPath: 'images/',
+              useRelativePath: process.env.NODE_ENV === "production"
+            }
+          }
+        ]
       },
     ],
   },

@@ -1,13 +1,14 @@
 import React from 'react';
 import { hot } from 'react-hot-loader'
+import img from '../../images/webpack-logo.svg';
 
 const App = () => {
   return (
     <div className="container">
-      <h1>Webpack4 starter!</h1>
-      <div className="logo"></div>
+      <h1>Webpack4-React Starter</h1>
+      <img src={img} alt="weback-logo" />
       <footer>
-        <small>Developed by @silvestrevivo</small>
+        <small>Developed by <a href="https://github.com/silvestrevivo" target="_blank">@silvestrevivo</a></small>
       </footer>
     </div>
   );
