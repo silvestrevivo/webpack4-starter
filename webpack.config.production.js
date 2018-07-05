@@ -57,6 +57,19 @@ module.exports = {
         exclude: /(node_modules)/,
         loader: 'babel-loader',
       },
+      {
+        test: /\.(png|jpe?g|gif|svg)(\?[\s\S]+)?$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[hash].[ext]',
+              outputPath: 'images/',
+              useRelativePath: process.env.NODE_ENV === "production"
+            }
+          }
+        ]
+      },
     ],
   },
 

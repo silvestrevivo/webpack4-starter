@@ -80,7 +80,6 @@ module.exports = {
             options: {}
           }
         ]
-        //use: 'file-loader?name=bgimages/[name].[ext]',
       },
     ],
   },
