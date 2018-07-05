@@ -89,7 +89,7 @@ module.exports = {
       template: './public/index.html',
       favicon: './public/favicon.ico'
     }),
-    new CleanWebpackPlugin(['dist/static/', 'dist/styles/', 'dist/*.html', 'dist/favicon.ico']),
+    new CleanWebpackPlugin(['dist/static/', 'dist/styles/', 'dist/*.html', 'dist/favicon.ico', 'dist/images/']),
     new webpack.HotModuleReplacementPlugin(),
     new ExtractTextPlugin({
       filename: 'styles/styles.[hash].css',
